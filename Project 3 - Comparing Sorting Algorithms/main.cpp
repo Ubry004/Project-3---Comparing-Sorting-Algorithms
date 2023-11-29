@@ -1,6 +1,9 @@
-#include <iostream>
 #include "data.h"
 #include "sort.h"
+
+#include "faker-cxx\Airline.h"
+
+#include <iostream>
 
 //TODO:
 /*
