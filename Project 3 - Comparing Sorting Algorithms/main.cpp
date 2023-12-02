@@ -1,9 +1,13 @@
 #include "data.h"
 #include "sort.h"
 
-#include "faker-cxx\Airline.h"
-
+#include <iomanip>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <string>
+using namespace std;
 
 //TODO:
 /*
@@ -14,6 +18,24 @@
 * (add other stuff here)
 */
 
-int main() {
-	std::cout << "Hello World!" << std::endl;
+
+int main()
+{
+	// File pointer 
+    ifstream str; 
+  
+    // Open an existing file 
+    str.open("VideoGames.csv", ios::in); 
+  
+    vector<string> result;
+    string line;
+    getline(str,line);
+
+    stringstream lineStream(line);
+    string cell;
+
+    getline(str,line);
+	std::cout << line << '\n';
+
+
 }
