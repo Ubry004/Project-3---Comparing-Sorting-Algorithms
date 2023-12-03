@@ -96,7 +96,7 @@ int main()
     /////// Main Menu Code ///////
 
     vector<vector<pair<string, string>>> choices = { yearData, NAData, EUData, JPData, OtherData, GlobalData };
-    vector<string> categories = { "Name", "Year", "NA Sales", "EU Sales", "JP Sales", "Other Sales", "Global Sales" };
+    vector<string> categories = { "Year", "NA Sales", "EU Sales", "JP Sales", "Other Sales", "Global Sales" };
 
     int choice;
     int dataAmount; // Let the user choose how much data to sort (to speed up sort times)
@@ -108,17 +108,16 @@ int main()
         "What do you want to sort by?\n";
     
     cout << endl <<
-        "1) Name\n"         <<
-        "2) Year\n"         <<
-        "3) NA Sales\n"     <<
-        "4) EU Sales\n"     <<
-        "5) JP Sales\n"     <<
-        "6) Other Sales\n"  <<
-        "7) Global Sales\n\n";
+        "1) Year\n"         <<
+        "2) NA Sales\n"     <<
+        "3) EU Sales\n"     <<
+        "4) JP Sales\n"     <<
+        "5) Other Sales\n"  <<
+        "6) Global Sales\n\n";
 
     cin >> choice;
     if (choice == 1) category = 0;
-    category = choice - 2;
+    category = choice - 1;
 
     cout << endl <<
         "1) Ascending\n" <<
