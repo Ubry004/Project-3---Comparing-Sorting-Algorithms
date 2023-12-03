@@ -99,6 +99,7 @@ int main()
     vector<string> categories = { "Name", "Year", "NA Sales", "EU Sales", "JP Sales", "Other Sales", "Global Sales" };
 
     int choice;
+    int dataAmount; // Let the user choose how much data to sort (to speed up sort times)
     int category;
     string order;
     cout <<
@@ -127,13 +128,18 @@ int main()
     if (choice == 1) order = "Ascending";
     if (choice == 2) order = "Descending";
 
+    cout << endl << "How many data points?\n Choose a number between 1 and 16720\n (More data means longer sort times)\n";
+
+    cin >> choice;
+    dataAmount = choice;
+
     /////// Using Data ///////
 
     // adjust based on what we're doing, for now manually do it but later we can do actual input and formatting and stuff
     //category = "NA Data";
     //order = "Descending";
     vector<pair<string, string>> data = choices[category];
-
+    vector<pair<string, string>> sorted_data = choices[category]; // Place sorted data here
     
     cout << "------------ Sorting by " << categories[category + 1] << " - " << order << " ------------" << endl;
 
@@ -141,9 +147,11 @@ int main()
     auto start = chrono::steady_clock::now();
 
     if (order == "Ascending") {
+        //sorted_data = MergeSort(data, 0, dataAmount);
         sort(data.begin(), data.end(), sortAscending); // placeholder, change with actual implemented sorting algo
     }
     else if (order == "Descending") {
+        //sorted_data = MergeSort(data, 0, dataAmount);
         sort(data.begin(), data.end(), sortDescending); // placeholder, change with actual implemented sorting algo
     }
 
@@ -152,7 +160,7 @@ int main()
     cout << "Duration: " << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 
     // For testing, adjust with how many values you want to see
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < dataAmount; i++)
     {
         cout << right << setfill('.') << data[i].second <<  ", " << setw(60) << data[i].first << endl;
     }
