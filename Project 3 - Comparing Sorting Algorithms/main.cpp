@@ -2,6 +2,7 @@
 #include "sort.h"
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -44,13 +45,14 @@ bool validNum (const string &str)
 ////////////////////// Main //////////////////////
 int main()
 {
+
     /////// Reading File ///////
     ifstream file;
-  
+
     // Open an existing file & take buffer
-    file.open("VideoGames.csv", ifstream::in); 
+    file.open("VideoGames.csv", ifstream::in);
     string line;
-    getline(file,line);
+    getline(file, line);
 
     // Reading file into a stream, then reading stream
     string name;
@@ -61,14 +63,14 @@ int main()
     string other_sales;
     string global_sales;
 
-    vector<pair<string,string>> yearData;
-    vector<pair<string,string>> NAData;
-    vector<pair<string,string>> EUData;
-    vector<pair<string,string>> JPData;
-    vector<pair<string,string>> OtherData;
-    vector<pair<string,string>> GlobalData;
+    vector<pair<string, string>> yearData;
+    vector<pair<string, string>> NAData;
+    vector<pair<string, string>> EUData;
+    vector<pair<string, string>> JPData;
+    vector<pair<string, string>> OtherData;
+    vector<pair<string, string>> GlobalData;
 
-    while (getline(file,line))
+    while (getline(file, line))
     {
         stringstream ss(line);
 
@@ -82,38 +84,77 @@ int main()
         getline(ss, global_sales, ',');
 
         if (validNum(year))
-            yearData.push_back({name,year});
+            yearData.push_back({ name,year });
 
-        NAData.push_back({name, na_sales});
-        EUData.push_back({name, eu_sales});
-        JPData.push_back({name, jp_sales});
-        OtherData.push_back({name, other_sales});
-        GlobalData.push_back({name, global_sales});
+        NAData.push_back({ name, na_sales });
+        EUData.push_back({ name, eu_sales });
+        JPData.push_back({ name, jp_sales });
+        OtherData.push_back({ name, other_sales });
+        GlobalData.push_back({ name, global_sales });
     }
+
+    /////// Main Menu Code ///////
+
+    vector<vector<pair<string, string>>> choices = { yearData, NAData, EUData, JPData, OtherData, GlobalData };
+    vector<string> categories = { "Name", "Year", "NA Sales", "EU Sales", "JP Sales", "Other Sales", "Global Sales" };
+
+    int choice;
+    int category;
+    string order;
+    cout <<
+        "Sorting Algorithm Comparisons!\n" <<
+        "In this program you can sort video games by various attributes.\n\n"
+        "What do you want to sort by?\n";
+    
+    cout << endl <<
+        "1) Name\n"         <<
+        "2) Year\n"         <<
+        "3) NA Sales\n"     <<
+        "4) EU Sales\n"     <<
+        "5) JP Sales\n"     <<
+        "6) Other Sales\n"  <<
+        "7) Global Sales\n\n";
+
+    cin >> choice;
+    if (choice == 1) category = 0;
+    category = choice - 2;
+
+    cout << endl <<
+        "1) Ascending\n" <<
+        "2) Descending\n\n";
+
+    cin >> choice;
+    if (choice == 1) order = "Ascending";
+    if (choice == 2) order = "Descending";
 
     /////// Using Data ///////
 
     // adjust based on what we're doing, for now manually do it but later we can do actual input and formatting and stuff
-    string category = "NA Data";
-    string order = "Descending";
-    vector<pair<string, string>> data = NAData;
+    //category = "NA Data";
+    //order = "Descending";
+    vector<pair<string, string>> data = choices[category];
 
     
-    cout << "------------ Sorting by " << category << " - " << order << " ------------" << endl;
+    cout << "------------ Sorting by " << categories[category + 1] << " - " << order << " ------------" << endl;
 
     // TODO: Insert Sorting Algorithm Here (sort by second value in pairs)
     auto start = chrono::steady_clock::now();
 
-    sort(data.begin(),data.end(), sortAscending); // placeholder, change with actual implemented sorting algo
+    if (order == "Ascending") {
+        sort(data.begin(), data.end(), sortAscending); // placeholder, change with actual implemented sorting algo
+    }
+    else if (order == "Descending") {
+        sort(data.begin(), data.end(), sortDescending); // placeholder, change with actual implemented sorting algo
+    }
 
     auto end = chrono::steady_clock::now();
     auto diff = end - start;
     cout << "Duration: " << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 
     // For testing, adjust with how many values you want to see
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 100; i++)
     {
-        cout << data[i].first << ", " << data[i].second << endl;
+        cout << right << setfill('.') << data[i].second <<  ", " << setw(60) << data[i].first << endl;
     }
 
     return 0;
