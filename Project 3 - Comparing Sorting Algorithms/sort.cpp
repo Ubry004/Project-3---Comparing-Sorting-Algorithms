@@ -64,6 +64,7 @@ vector<pair<string, string>> ShellSortA(vector<pair<string, string>> vec) {
 			i++;
 		}
 	}
+	return vec;
 }
 
 vector<pair<string, string>> ShellSortD(vector<pair<string, string>> vec) {
@@ -76,4 +77,5 @@ vector<pair<string, string>> ShellSortD(vector<pair<string, string>> vec) {
 			i++;
 		}
 	}
+	return vec;
 }
