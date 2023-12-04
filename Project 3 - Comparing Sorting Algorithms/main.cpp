@@ -10,14 +10,6 @@
 #include <chrono>
 using namespace std;
 
-//TODO:
-/*
-* Data I/O might be buggy, check & test
-* Implement sorting algorithms using data
-* Compare sorting algorithms and output to console
-* (add other stuff here)
-*/
-
 ////////////////////// Helper Functions //////////////////////
 
 // checks to see if data is a valid number (ex: some parts of data have 'N/A' written)
