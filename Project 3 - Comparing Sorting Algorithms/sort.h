@@ -9,5 +9,5 @@ void MergeSortedIntervals(vector<pair<string, string>>& vec, int start, int mid,
 vector<pair<string, string>> MergeSort(vector<pair<string, string>> vec, int start, int end, string order);
 
 // Zach - Shell Sort
-vector<pair<string, string>> ShellSortA(vector<pair<string, string>> vec);
-vector<pair<string, string>> ShellSortD(vector<pair<string, string>> vec);
+vector<pair<string, string>> ShellSortA(vector<pair<string, string>> vec, int points);
+vector<pair<string, string>> ShellSortD(vector<pair<string, string>> vec, int points);
