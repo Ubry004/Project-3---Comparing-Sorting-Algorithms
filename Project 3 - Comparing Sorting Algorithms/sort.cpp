@@ -14,7 +14,7 @@ void MergeSortedIntervals(vector<pair<string, string>>& vec, int start, int mid,
 	j = mid + 1;
 
 	while (i <= mid && j <= end) {
-		if (vec[i].second <= vec[j].second) {
+		if (stof(vec[i].second) <= stof(vec[j].second)) {
 			temp.push_back(vec[i]);
 			i++;
 		}
@@ -40,38 +40,38 @@ void MergeSortedIntervals(vector<pair<string, string>>& vec, int start, int mid,
 }
 
 // Currently not entirely functional
-vector<pair<string, string>> MergeSort(vector<pair<string, string>> vec, int start, int end) {
+vector<pair<string, string>> MergeSort(vector<pair<string, string>> vec, int start, int end, string order) {
 	vector<pair<string, string>> temp = vec;
 	if (start < end) {
 		int mid = (start + end) / 2;
-		MergeSort(temp, start, mid);
-		MergeSort(temp, mid + 1, end);
+		temp = MergeSort(temp, start, mid, order);
+		temp = MergeSort(temp, mid + 1, end, order);
 		MergeSortedIntervals(temp, start, mid, end);
 	}
 	return temp;
 }
 
 // shell sort
-vector<pair<string, string>> ShellSortA(vector<pair<string, string>> vec) {
-	for (int gap = vec.size() / 2; gap > 0; gap /= 2) {
-		int i = 0;
-		while ((i + gap) < vec.size()) {
-			if (vec[i].second > vec[i + gap].second) {
-				swap(vec[i], vec[i + gap]);
-			}
-			i++;
-		}
-	}
-}
-
-vector<pair<string, string>> ShellSortD(vector<pair<string, string>> vec) {
-	for (int gap = vec.size() / 2; gap > 0; gap /= 2) {
-		int i = 0;
-		while ((i + gap) < vec.size()) {
-			if (vec[i].second < vec[i + gap].second) {
-				swap(vec[i], vec[i + gap]);
-			}
-			i++;
-		}
-	}
-}
+//vector<pair<string, string>> ShellSortA(vector<pair<string, string>> vec) {
+//	for (int gap = vec.size() / 2; gap > 0; gap /= 2) {
+//		int i = 0;
+//		while ((i + gap) < vec.size()) {
+//			if (vec[i].second > vec[i + gap].second) {
+//				swap(vec[i], vec[i + gap]);
+//			}
+//			i++;
+//		}
+//	}
+//}
+//
+//vector<pair<string, string>> ShellSortD(vector<pair<string, string>> vec) {
+//	for (int gap = vec.size() / 2; gap > 0; gap /= 2) {
+//		int i = 0;
+//		while ((i + gap) < vec.size()) {
+//			if (vec[i].second < vec[i + gap].second) {
+//				swap(vec[i], vec[i + gap]);
+//			}
+//			i++;
+//		}
+//	}
+//}

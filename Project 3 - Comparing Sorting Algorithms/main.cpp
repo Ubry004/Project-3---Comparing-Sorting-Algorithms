@@ -1,3 +1,4 @@
+#include "quicksort.h"
 #include "data.h"
 #include "sort.h"
 
@@ -139,29 +140,68 @@ int main()
     //order = "Descending";
     vector<pair<string, string>> data = choices[category];
     vector<pair<string, string>> sorted_data = choices[category]; // Place sorted data here
-    
-    cout << "------------ Sorting by " << categories[category + 1] << " - " << order << " ------------" << endl;
+
+    // Make the sorted data vector smaller based on dataAmount (erase from the back)
+    data.erase(data.begin() + dataAmount, data.end());
+
+    cout << "------------ Sorting by " << categories[category] << " - " << order << " ------------" << endl;
 
     // TODO: Insert Sorting Algorithm Here (sort by second value in pairs)
-    auto start = chrono::steady_clock::now();
+    //auto start = chrono::steady_clock::now();
+
+    //if (order == "Ascending") {
+    //    sorted_data = MergeSort(data, 0, dataAmount, order);
+    //    //sort(data.begin(), data.end(), sortAscending); // placeholder, change with actual implemented sorting algo
+    //}
+    //else if (order == "Descending") {
+    //    sorted_data = MergeSort(data, 0, dataAmount, order);
+    //    //sort(data.begin(), data.end(), sortDescending); // placeholder, change with actual implemented sorting algo
+    //}
+
+    //auto end = chrono::steady_clock::now();
+    //auto diff = end - start;
+    //cout << "Duration: " << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 
     if (order == "Ascending") {
-        //sorted_data = MergeSort(data, 0, dataAmount);
-        sort(data.begin(), data.end(), sortAscending); // placeholder, change with actual implemented sorting algo
+        // Quicksort - Brynn
+        auto start = chrono::steady_clock::now();
+        sorted_data = quicksortA(data, 0, data.size() - 1);
+        auto end = chrono::steady_clock::now();
+        auto diff = end - start;
+        cout << "Quicksort Duration: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
+
+        // Merge Sort - Kamron
+        start = chrono::steady_clock::now();
+        sorted_data = MergeSort(data, 0, data.size() - 1, order);
+        end = chrono::steady_clock::now();
+        diff = end - start;
+        cout << "Merge Sort Duration: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
+
+        // Insert Other Sorts Here
+
     }
     else if (order == "Descending") {
-        //sorted_data = MergeSort(data, 0, dataAmount);
-        sort(data.begin(), data.end(), sortDescending); // placeholder, change with actual implemented sorting algo
-    }
+        // Quicksort - Brynn
+        auto start = chrono::steady_clock::now();
+        sorted_data = quicksortD(data, 0, data.size() - 1);
+        auto end = chrono::steady_clock::now();
+        auto diff = end - start;
+        cout << "Quicksort Duration: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
 
-    auto end = chrono::steady_clock::now();
-    auto diff = end - start;
-    cout << "Duration: " << chrono::duration <double, milli> (diff).count() << " ms" << endl;
+        // Merge Sort - Kamron
+        start = chrono::steady_clock::now();
+        sorted_data = MergeSort(data, 0, data.size() - 1, order);
+        end = chrono::steady_clock::now();
+        diff = end - start;
+        cout << "Merge Sort Duration: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
+
+        // Insert Other Sorts Here
+    }
 
     // For testing, adjust with how many values you want to see
     for (int i = 0; i < dataAmount; i++)
     {
-        cout << right << setfill('.') << data[i].second <<  ", " << setw(60) << data[i].first << endl;
+        cout << right << setfill('.') << sorted_data[i].second <<  ", " << setw(60) << sorted_data[i].first << endl;
     }
 
     return 0;
