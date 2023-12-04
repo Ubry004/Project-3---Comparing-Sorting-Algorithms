@@ -50,3 +50,28 @@ vector<pair<string, string>> MergeSort(vector<pair<string, string>> vec, int sta
 	}
 	return temp;
 }
+
+// shell sort
+vector<pair<string, string>> ShellSortA(vector<pair<string, string>> vec) {
+	for (int gap = vec.size() / 2; gap > 0; gap /= 2) {
+		int i = 0;
+		while ((i + gap) < vec.size()) {
+			if (vec[i].second > vec[i + gap].second) {
+				swap(vec[i], vec[i + gap]);
+			}
+			i++;
+		}
+	}
+}
+
+vector<pair<string, string>> ShellSortD(vector<pair<string, string>> vec) {
+	for (int gap = vec.size() / 2; gap > 0; gap /= 2) {
+		int i = 0;
+		while ((i + gap) < vec.size()) {
+			if (vec[i].second < vec[i + gap].second) {
+				swap(vec[i], vec[i + gap]);
+			}
+			i++;
+		}
+	}
+}
