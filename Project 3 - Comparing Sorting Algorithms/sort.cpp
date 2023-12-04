@@ -14,7 +14,6 @@ void MergeSortedIntervals(vector<pair<string, string>>& vec, int start, int mid,
 	j = mid + 1;
 
 	while (i <= mid && j <= end) {
-
 		if (vec[i].second <= vec[j].second) {
 			temp.push_back(vec[i]);
 			i++;
@@ -23,7 +22,6 @@ void MergeSortedIntervals(vector<pair<string, string>>& vec, int start, int mid,
 			temp.push_back(vec[j]);
 			j++;
 		}
-
 	}
 
 	while (i <= mid) {
