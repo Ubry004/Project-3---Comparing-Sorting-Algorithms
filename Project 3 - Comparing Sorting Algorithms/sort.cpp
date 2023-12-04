@@ -52,26 +52,34 @@ vector<pair<string, string>> MergeSort(vector<pair<string, string>> vec, int sta
 }
 
 // shell sort
-vector<pair<string, string>> ShellSortA(vector<pair<string, string>> vec) {
+vector<pair<string, string>> ShellSortA(vector<pair<string, string>> vec, int n) {
 	for (int gap = vec.size() / 2; gap > 0; gap /= 2) {
-		int i = 0;
-		while ((i + gap) < vec.size()) {
-			if (vec[i].second > vec[i + gap].second) {
-				swap(vec[i], vec[i + gap]);
+		for (int i = gap; i < n; i++) {
+			string name = vec[i].first;
+			string xs = vec[i].second;
+			float x = stof(vec[i].second);
+			int j;
+			for (j = i; j >= gap && stof(vec[j - gap].second) > x; j -= gap) {
+				vec[j] = vec[j - gap];
 			}
-			i++;
+			vec[j] = make_pair(name, xs);
 		}
 	}
+	return vec;
 }
 
-vector<pair<string, string>> ShellSortD(vector<pair<string, string>> vec) {
+vector<pair<string, string>> ShellSortD(vector<pair<string, string>> vec, int n) {
 	for (int gap = vec.size() / 2; gap > 0; gap /= 2) {
-		int i = 0;
-		while ((i + gap) < vec.size()) {
-			if (vec[i].second < vec[i + gap].second) {
-				swap(vec[i], vec[i + gap]);
+		for (int i = gap; i < n; i++) {
+			string name = vec[i].first;
+			string xs = vec[i].second;
+			float x = stof(vec[i].second);
+			int j;
+			for (j = i; j >= gap && stof(vec[j - gap].second) < x; j -= gap) {
+				vec[j] = vec[j - gap];
 			}
-			i++;
+			vec[j] = make_pair(name, xs);
 		}
 	}
+	return vec;
 }

@@ -1,5 +1,4 @@
 #include "quicksort.h"
-#include "data.h"
 #include "sort.h"
 
 #include <iostream>
@@ -8,7 +7,6 @@
 #include <sstream>
 #include <vector>
 #include <string>
-#include <algorithm>
 #include <chrono>
 using namespace std;
 
@@ -21,16 +19,6 @@ using namespace std;
 */
 
 ////////////////////// Helper Functions //////////////////////
-// use to sort by second index in pairs
-bool sortAscending(const pair<string,string> &a, const pair<string,string> &b)
-{
-    return (a.second > b.second); // > = greatest to least, < = least to greatest
-}
-
-bool sortDescending(const pair<string,string> &a, const pair<string,string> &b)
-{
-    return (a.second < b.second);
-}
 
 // checks to see if data is a valid number (ex: some parts of data have 'N/A' written)
 bool validNum (const string &str)
@@ -136,8 +124,6 @@ int main()
     /////// Using Data ///////
 
     // adjust based on what we're doing, for now manually do it but later we can do actual input and formatting and stuff
-    //category = "NA Data";
-    //order = "Descending";
     vector<pair<string, string>> data = choices[category];
     vector<pair<string, string>> sorted_data = choices[category]; // Place sorted data here
 
@@ -145,22 +131,6 @@ int main()
     data.erase(data.begin() + dataAmount, data.end());
 
     cout << "------------ Sorting by " << categories[category] << " - " << order << " ------------" << endl;
-
-    // TODO: Insert Sorting Algorithm Here (sort by second value in pairs)
-    //auto start = chrono::steady_clock::now();
-
-    //if (order == "Ascending") {
-    //    sorted_data = MergeSort(data, 0, dataAmount, order);
-    //    //sort(data.begin(), data.end(), sortAscending); // placeholder, change with actual implemented sorting algo
-    //}
-    //else if (order == "Descending") {
-    //    sorted_data = MergeSort(data, 0, dataAmount, order);
-    //    //sort(data.begin(), data.end(), sortDescending); // placeholder, change with actual implemented sorting algo
-    //}
-
-    //auto end = chrono::steady_clock::now();
-    //auto diff = end - start;
-    //cout << "Duration: " << chrono::duration <double, milli> (diff).count() << " ms" << endl;
 
     if (order == "Ascending") {
         // Quicksort - Brynn
@@ -176,6 +146,13 @@ int main()
         end = chrono::steady_clock::now();
         diff = end - start;
         cout << "Merge Sort Duration: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
+
+        // Shell Sort - Zach
+        start = chrono::steady_clock::now();
+        sorted_data = ShellSortA(data, data.size());
+        end = chrono::steady_clock::now();
+        diff = end - start;
+        cout << "Shell Sort Duration: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
 
         // Insert Other Sorts Here
 
@@ -194,6 +171,13 @@ int main()
         end = chrono::steady_clock::now();
         diff = end - start;
         cout << "Merge Sort Duration: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
+
+        // Shell Sort - Zach
+        start = chrono::steady_clock::now();
+        sorted_data = ShellSortD(data, data.size());
+        end = chrono::steady_clock::now();
+        diff = end - start;
+        cout << "Shell Sort Duration: " << chrono::duration <double, milli>(diff).count() << " ms" << endl;
 
         // Insert Other Sorts Here
     }

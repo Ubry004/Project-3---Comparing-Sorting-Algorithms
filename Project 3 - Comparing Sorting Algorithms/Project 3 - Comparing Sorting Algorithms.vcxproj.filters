@@ -23,9 +23,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="data.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sort.h">
       <Filter>Header Files</Filter>
     </ClInclude>

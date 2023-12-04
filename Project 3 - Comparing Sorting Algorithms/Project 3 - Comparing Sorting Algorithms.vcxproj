@@ -132,7 +132,6 @@
     <ClCompile Include="sort.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="data.h" />
     <ClInclude Include="quicksort.h" />
     <ClInclude Include="sort.h" />
   </ItemGroup>
